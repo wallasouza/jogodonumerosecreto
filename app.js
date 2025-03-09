@@ -7,6 +7,14 @@ let tentativas = 1;
 function exibirTextoNaTela(tag, texto){
     let campo = document.querySelector(tag);
     campo.innerHTML = texto;
+    if ('speechSynthesis' in window) {
+        let utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = 'pt-BR'; 
+        utterance.rate = 2.2; 
+        window.speechSynthesis.speak(utterance); 
+    } else {
+        console.log("Web Speech API não suportada neste navegador.");
+    }
 }
 
 function exibirMensagemInicial(){
@@ -19,7 +27,7 @@ exibirMensagemInicial();
 function verificarChute(){
     let chute = document.querySelector('input').value;
     let palavraTentativa = tentativas > 1 ? 'tentativas' : 'tentativa';
-    let mensagemTentativa = `Voce descobriu o numero secreto com ${tentativas} ${palavraTentativa}`;
+    let mensagemTentativa = `Você descobriu o numero secreto com ${tentativas} ${palavraTentativa}`;
     if (chute == numeroSecreto){
         exibirTextoNaTela('h1','Acertou!');
         exibirTextoNaTela('p',mensagemTentativa);
