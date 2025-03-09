@@ -1,6 +1,6 @@
 
 let listaNumSecreto = [];
-let base = 2;
+let base = parseInt(10);
 let numeroSecreto = gerarNumeroAleatorio(base);
 let tentativas = 1;
 
@@ -28,6 +28,7 @@ function verificarChute(){
     } else{
         if (chute > numeroSecreto){
             exibirTextoNaTela('p','O numero secreto é menor');
+           
         }else{
             exibirTextoNaTela('p','O numero secreto é maior');
         }
@@ -44,13 +45,13 @@ function gerarNumeroAleatorio(base){
 
     if(qtdElemntosLista == base){
         listaNumSecreto = [];
+        alert('Voce zerou o game');
     }
     let numeroEscolhido = parseInt(Math.random() * base + 1);
     if (listaNumSecreto.includes(numeroEscolhido)){
-        gerarNumeroAleatorio();
+        return gerarNumeroAleatorio(base);
     } else {
         listaNumSecreto.push(numeroEscolhido);
-        console.log(listaNumSecreto);
         return numeroEscolhido;
         
     }
